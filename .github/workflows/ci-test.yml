@@ -12,6 +12,10 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-24.04
 
+    defaults:
+      run:
+        working-directory: ./app
+
     services:
       mysql:
         image: mysql:8.0
