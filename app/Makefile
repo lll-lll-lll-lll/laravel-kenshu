@@ -1,6 +1,6 @@
 # コンテナ接続
 exec:
-	docker-compose exec app bash && cd /var/www/app
+	docker compose exec app bash
 migrate:
 	php artisan migrate
 
