@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(TagSeeder::class);
         User::factory(3)->create()->each(function ($user) {
             // 手動自動テストでパスワードがユーザごとに変わるのが面倒なので、passwrodで統一
             $user->password = 'password';
