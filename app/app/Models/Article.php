@@ -10,6 +10,20 @@ class Article extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id',
+        'title',
+        'content',
+        'created_at',
+        'updated_at',
+        'user_id',
+    ];
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
