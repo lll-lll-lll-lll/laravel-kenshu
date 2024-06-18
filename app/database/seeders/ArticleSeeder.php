@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\ArticleImage;
 use Illuminate\Database\Seeder;
 
 class ArticleSeeder extends Seeder
@@ -24,5 +25,8 @@ class ArticleSeeder extends Seeder
         Article::factory()->create([
             'user_id' => 3,
         ]);
+        Article::factory(5)->create()->each(function ($article) {
+            ArticleImage::factory(5)->create(['article_id' => $article->id]);
+        });
     }
 }

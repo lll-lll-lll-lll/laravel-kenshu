@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class ArticleFactory extends Factory
             'title' => fake()->title(),
             'content' => fake()->text(),
             'created_at' => now(),
+            'user_id' => User::factory()
         ];
     }
 }
