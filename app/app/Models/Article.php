@@ -10,6 +10,13 @@ class Article extends Model
     use HasFactory;
 
     /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'articles';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleImage extends Model
 {
     use HasFactory;
+
+    /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'article_images';
     public $timestamps = false;
     /**
      * The attributes that are mass assignable.

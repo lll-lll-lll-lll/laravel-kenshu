@@ -11,6 +11,13 @@ class ArticleTag extends Model
     public $timestamps = false;
 
     /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'article_tags';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

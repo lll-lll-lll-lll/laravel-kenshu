@@ -10,6 +10,13 @@ class Tag extends Model
     use HasFactory;
     public $timestamps = false;
 
+    /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'tags';
+
     protected $fillable = [
         'id',
         'name',
