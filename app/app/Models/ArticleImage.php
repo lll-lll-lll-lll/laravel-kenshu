@@ -10,6 +10,12 @@ class ArticleImage extends Model
     use HasFactory;
     public $timestamps = false;
     /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'article_images';
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
