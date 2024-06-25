@@ -13,17 +13,14 @@ class ArticleDeleteTest extends TestCase
 
     public function test_authenticated_user_can_delete_an_article()
     {
-        // テストユーザーと記事を作成
         $user = User::factory()->create();
         $article = Article::factory()->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user)->delete(route('articles.destroy', $article));
 
-        // リダイレクト先とステータスコードを確認
+        // 検証
         $response->assertRedirect(route('articles.index'));
         $response->assertStatus(302);
-
-        // データベースから記事が削除されたことを確認
         $this->assertDatabaseMissing('articles', [
             'id' => $article->id,
         ]);
