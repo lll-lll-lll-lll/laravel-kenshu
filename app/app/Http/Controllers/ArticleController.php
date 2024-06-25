@@ -15,4 +15,8 @@ class ArticleController extends Controller
         $articles = Article::with('user', 'tags')->get();
         return view('articles.index', compact('articles'));
     }
+    public function show(Article $article): Factory|Application|View
+    {
+        return view('articles.show', compact('article'));
+    }
 }
