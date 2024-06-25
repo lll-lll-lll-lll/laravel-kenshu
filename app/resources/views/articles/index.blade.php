@@ -15,6 +15,22 @@
         </div>
     @endif
 
+    <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-semibold">Articles</h2>
+        @auth
+            <a href="{{ route('articles.create') }}" class="px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Create New Article
+            </a>
+        @else
+            <a href="{{ route('register') }}" class="px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Register
+            </a>
+            <a href="{{ route('login') }}" class="px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Log in
+            </a>
+        @endauth
+    </div>
+
     <div class="mt-6">
         @foreach ($articles as $article)
             <div class="mb-4 p-4 bg-white rounded-lg shadow-md dark:bg-zinc-900">
