@@ -144,4 +144,24 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.show', $article)->with('success', 'Article updated successfully.');
     }
+
+    public function destroy(Article $article): RedirectResponse
+    {
+        $this->authorize('delete', $article);
+
+        // 画像を削除
+        foreach ($article->images as $image) {
+            if ($image->thumbnail_image_path) {
+                Storage::disk('public')->delete($image->thumbnail_image_path);
+            }
+            if ($image->sub_image_path) {
+                Storage::disk('public')->delete($image->sub_image_path);
+            }
+            $image->delete();
+        }
+
+        $article->delete();
+
+        return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
+    }
 }
