@@ -38,37 +38,33 @@ class ArticleController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sub_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+
         DB::beginTransaction();
         try {
             $user = Auth::user();
-
             $article = Article::create([
-                'title' => $request->title,
-                'content' => $request->content,
+                'title' => $validated['title'],
+                'content' => $validated['content'],
                 'user_id' => $user->id,
             ]);
 
             $articleImage = new ArticleImage();
             $articleImage->article_id = $article->id;
 
-            $hasImage = false;
-
-            if ($request->hasFile('thumbnail_image')) {
+            if ($request->hasFile('thumbnail_image') && $request->hasFile('sub_image')) {
                 $thumbnailPath = $request->file('thumbnail_image')->store('images', 'public');
-                $articleImage->thumbnail_image_path = $thumbnailPath;
-                $hasImage = true;
-            }
-
-            if ($request->hasFile('sub_image')) {
                 $subImagePath = $request->file('sub_image')->store('images', 'public');
+                $articleImage->thumbnail_image_path = $thumbnailPath;
                 $articleImage->sub_image_path = $subImagePath;
-                $hasImage = true;
             }
-
-            if ($hasImage) {
-                $articleImage->save();
-            }
-
             if ($request->tags) {
                 $article->tags()->sync($request->tags);
             }
