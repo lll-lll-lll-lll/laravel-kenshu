@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,11 @@
     <div class="mt-6">
         @foreach ($articles as $article)
             <div class="mb-4 p-4 bg-white rounded-lg shadow-md dark:bg-zinc-900">
+                <h3 class="text-xl font-semibold">
+                    <a href="{{ route('articles.show', $article->id) }}" class="text-indigo-600 hover:underline">
+                        {{ $article->title }}
+                    </a>
+                </h3>
                 <p class="mt-2 text-gray-700 dark:text-gray-300">{{ $article->content }}</p>
                 <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">By {{ $article->user->name }}</div>
                 @if ($article->images->isNotEmpty())
