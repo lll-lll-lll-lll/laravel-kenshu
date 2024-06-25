@@ -139,7 +139,7 @@ class ArticleController extends Controller
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors('記事の更新に失敗しました: ' . $e->getMessage());
+            return redirect()->back()->withErrors('記事の更新に失敗しました: ');
         }
 
         return redirect()->route('articles.show', $article)->with('success', 'Article updated successfully.');
